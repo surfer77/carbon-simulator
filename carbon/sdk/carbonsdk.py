@@ -198,7 +198,8 @@ class TradeData:
     def cttargs(self):
         """args for mComposeTradeTransaction"""
         return tuple(self.cttkwargs.values())
-    
+
+# see https://github.com/bancorprotocol/carbon-simulator/blob/beta/benchmark/core/trade/impl.py
 @dataclass
 class EncodedOrder():
     """
