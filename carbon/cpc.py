@@ -114,6 +114,11 @@ class ConstantProductCurve():
         ya = y0 - sqrt(k*p_min)
         return cls(k=k, x=x0, x_act=xa, y_act=ya, pair=pair)
     
+    # @classmethod
+    # def from_sellrange(cls, p_start, p_end, x_act=None, pair=None):
+    #     "constructor: sell x_act base tokens on the upside from p_start..p_end"
+    #     return cls.from_pkpp(p=p_start, k= p_min=p_start, p_max=p_end, pair=pair)
+
     @property
     def tknb(self):
         "base token"
