@@ -188,7 +188,7 @@ objective = cp.Minimize(
 
 problem = cp.Problem(objective, constraints)
 result = problem.solve(verbose=False)  # Returns the optimal value.
-print(f"r={result:.2f}, dy={sum(dy.value):.2f}, dx={sum(dx.value):.2f}")
+print(f"r={result:.2f}")
 
 
 # -
