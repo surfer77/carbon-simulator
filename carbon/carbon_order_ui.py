@@ -13,8 +13,8 @@ VERSION HISTORY
 - v1.8: from_SDK, bn2int, roundsd; some prettification
 - v1.9: various additional properties representing curve parameters; used dataclass for yzABS; as_cpc
 """
-__version__ = "1.9"
-__date__ = "15/Mar/2023"
+__version__ = "1.9.1"
+__date__ = "16/Mar/2023"
 
 try:
     from .pair import CarbonPair
@@ -374,7 +374,7 @@ class CarbonOrderUI:
     @property
     def z(self):
         """alias for y (notation used in smart contracts)"""
-        return self.y 
+        return self.yint
 
     @property
     def Q(self):
