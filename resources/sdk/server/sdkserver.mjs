@@ -23,6 +23,10 @@ const date = "7/Mar/2022"
 var   port  = 3118 // C=3, A=1, R=18 (Carbon)
 var   token = "carbontoken"
 
+const CARBON_ADDR="0x135E72f1b65227b1C8e59DC1217096A114086876"
+const VOUCHER_ADDR="0x7E9e1C552f9b6460f4c390F2E1a89B7524243700"
+const RPC_ADDR="https://rpc.tenderly.co/fork/0e982c68-d3c1-4122-8879-fbae29595ce0"
+
 app.use(bodyParser.json())
 
 ////////////////////////////// ROUTES //////////////////////////////
