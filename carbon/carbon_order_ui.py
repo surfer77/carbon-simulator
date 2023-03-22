@@ -1241,6 +1241,12 @@ class CarbonOrderUI:
 class yzABSdata():
     """
     dataclass for yzABS data
+
+    :y:     curve loading
+    :z:     curve capacity
+    :A:     curve parameter A, scaled by S
+    :B:     curve parameter B, scaled by S
+    :S:     scaling factor
     """
     y: int
     z: int
@@ -1255,3 +1261,28 @@ class yzABSdata():
     @property
     def asdict(self):
         return dict(y=self.y, z=self.z, A=self.A, B=self.B, S=self.S)
+    
+    @property
+    def A_unscaled(self):
+        """uncscaled A"""
+        return self.A / self.S
+    
+    @property
+    def B_unscaled(self):
+        """uncscaled B"""
+        return self.B / self.S
+    
+    @property
+    def A_scaled(self):
+        """scaled A (alias for A)"""
+        return self.A
+    
+    @property
+    def B_scaled(self):
+        """scaled B (alias for B)"""
+        return self.B
+    
+    @property
+    def scaling_factor(self):
+        """scaling factor (alias for S)"""
+        return self.S
