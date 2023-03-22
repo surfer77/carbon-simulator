@@ -1,6 +1,7 @@
 import *  as tl from "./sdkserver_testlib.mjs"
 import { Sdk } from "@bancor/carbon-sdk";
 import { ethers } from 'ethers';
+import { cpSync } from "fs";
 
 const TENDERLY = true
 
@@ -293,7 +294,14 @@ export function dispatch(func, p){
             //     overrides?: PayableOverrides
             //   ): Promise<PopulatedTransaction>
             case n("updateStrategy"):
+                console.log("====================================")
+                p.baseToken = a(p.baseToken);
+                p.quoteToken = a(p.quoteToken);
+                if (p.buyMarginalPrice===null) p.buyMarginalPrice = undefined;
+                if (p.sellMarginalPrice===null) p.sellMarginalPrice = undefined
+                console.log("[updateStrategy] p", p);
                 result = sdk.updateStrategy(p.strategyId, p.encoded, a(p.baseToken), a(p.quoteToken), p.update, p.buyMarginalPrice, p.sellMarginalPrice, p.overrides);
+                console.log("====================================")
                 break;
     
             // public deleteStrategy(
