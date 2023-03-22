@@ -2,6 +2,7 @@ from .sdktoken import Tokens
 from .sdkbase import SDKBase
 
 n = SDKBase.c2s
+from dataclasses import dataclass, asdict
 
 class CarbonSDK0(SDKBase):
     """
@@ -443,15 +444,28 @@ class CarbonSDK0(SDKBase):
             }, sync=True)
         return self._checkresult(r)
 
-    def updateStrategy(self, strategyId, encoded, baseToken, quoteToken, update, buyMarginalPrice, sellMarginalPrice, overrides=None, sync=None):
+    @dataclass
+    class StrategyUpdate:
+        buyPriceLow: float = None
+        buyPriceHigh: float = None
+        buyBudget: float = None
+        sellPriceLow: float = None
+        sellPriceHigh: float = None
+        sellBudget: float = None
+
+        @property
+        def asdict(self):
+            return asdict(self)
+
+    def updateStrategy(self, strategyId, encoded, baseToken, quoteToken, update, buyMarginalPrice=None, sellMarginalPrice=None, overrides=None, sync=None):
         """
         updates an existing strategy
 
         :strategyId:            strategy id
-        :encoded:               encoded strategy ??? TODO
+        :encoded:               encoded strategy (as str)
         :baseToken:             base token (as address)
         :quoteToken:            quote token (as address)
-        :update:                update to apply to the strategy
+        :update:                update to apply to the strategy (as StrategyUpdate object)
         :buyMarginalPrice:      buy marginal price (in quote token per base token)
         :sellMarginalPrice:     sell marginal price (ditto)
         :overrides:             overrides to apply to the transaction
@@ -465,7 +479,7 @@ class CarbonSDK0(SDKBase):
                 "encoded": encoded, 
                 "baseToken": str(baseToken), 
                 "quoteToken": str(quoteToken), 
-                "update": bool(update), 
+                "update": update.asdict, 
                 "buyMarginalPrice": str(buyMarginalPrice), 
                 "sellMarginalPrice": str(sellMarginalPrice), 
                 "overrides": overrides
@@ -572,4 +586,5 @@ class CarbonSDK0(SDKBase):
             s2["encoded"][o] = dict()
             for f in ("y", "z", "A", "B"):
                 s2["encoded"][o][f] = self.bn2int(strat["encoded"][o][f])
+        s2["raw"] = strat
         return s2

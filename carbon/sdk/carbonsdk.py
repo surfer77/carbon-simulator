@@ -399,6 +399,9 @@ class Strategy():
     
     @classmethod
     def from_sdk(cls, dct):
+        """
+        alternative constructor: from the dict obtained from the SDK
+        """
         encoded = CarbonSDK.EncodedStrategy.from_sdk(dct["encoded"])
         sid = dct["id"]
         dct1 = {k:v for k,v in dct.items() if not k in ["id", "encoded"]}
