@@ -303,6 +303,24 @@ class EncodedOrder():
             token=token
         )
     
+    @classmethod
+    def encode_yzAB(cls, y, z, A, B, token=None):
+        """
+        encode A,B into the SDK format
+
+        :y:    number of token wei currently available to sell on the curve (loading; as int)
+        :z:    curve capacity in number of token wei (as int)
+        :A:    curve parameter A (as float)
+        :B:    curve parameter B (as float)
+        """
+        return cls(
+            y=int(y), 
+            z=int(z), 
+            A=cls.encodeFloat(A), 
+            B=cls.encodeFloat(B),
+            token=str(token)
+        )
+        
     @dataclass
     class DecodedOrder():
         """
